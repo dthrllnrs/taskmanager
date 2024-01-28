@@ -12,11 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Create a default user
-        User::create([
-            'name' => 'Default User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password'),
-        ]);
+        $this->call([
+            UsersSeeder::class,
+            TasksSeeder::class,
+        ]);        
     }
 }

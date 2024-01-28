@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\LandingPage;
+use App\Livewire\Tasks\Tasks;
+use App\Livewire\Users\Login;
+use App\Livewire\Users\Register;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +18,6 @@ use App\Livewire\Pages\LandingPage;
 */
 
 Route::get('/', LandingPage::class);
+Route::get('tasks', Tasks::class)->middleware('auth')->name('tasks');
+Route::get('login', Login::class)->middleware('guest')->name('login');
+Route::get('register', Register::class)->middleware('guest')->name('register');

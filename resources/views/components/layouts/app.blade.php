@@ -9,10 +9,11 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
         @vite('resources/css/app.css')
-
+        @vite('resources/js/app.js')
         <title>{{ $title ?? 'Task Manager' }}</title>
     </head>
-    <body>
+    <body class="min-h-dvh">
         {{ $slot }}
+
     </body>
 </html>
