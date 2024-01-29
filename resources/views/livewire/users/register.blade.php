@@ -1,9 +1,9 @@
 <div class="flex justify-center items-center min-h-screen">
-    <main class="md:w-1/3">
+    <main class="lg:w-1/3">
         <section class="illustration-section flex justify-center">
             <img class="h-48" src="{{ asset('svg/auth.svg') }}" alt="" srcset="">
         </section>
-        <section class="intro-section mb-5 px-4 md:px-0">
+        <section class="intro-section mb-5 px-4 lg:px-0">
             <h1 class="text-3xl mb-5 text-gray-dark text-center">Task Manager</h1>
             <p class="mb-5 text-gray-dark font-light text-center">Register to Task Manager and create your first task</p>
             <form action="" method="post">

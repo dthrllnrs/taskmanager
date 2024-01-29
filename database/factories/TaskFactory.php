@@ -20,7 +20,7 @@ class TaskFactory extends Factory
         $endDate = now()->addDays(7);
 
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'due_date' => $this->faker->dateTimeBetween($startDate, $endDate),
         ];
