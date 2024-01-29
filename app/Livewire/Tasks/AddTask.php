@@ -23,20 +23,32 @@ class AddTask extends Component
     public $due_date = '';
 
     public function handleSubmit() {
+        // validate form inputs
         $validated = $this->validate();
+        
         DB::beginTransaction();
+        $this->isLoading = true;
         try {
             $user = Auth::user();
 
             $task = $user->tasks()->create($validated);
 
             DB::commit();
+            $this->dispatch('refresh-tasks', 'all');
+            $this->clearForm();
             $this->showModal = false;
-            $this->dispatch('refreshTasks', 'Tasks');
         } catch (\Exception $e) {
             DB::rollback();
             $this->addError('data', $e->getMessage());
+        } finally {
+            $this->isLoading = false;
         }
+    }
+
+    public function clearForm() {
+        $this->reset('title');
+        $this->reset('description');
+        $this->reset('due_date');
     }
 
     public function render()

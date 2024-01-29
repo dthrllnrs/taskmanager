@@ -90,18 +90,9 @@
             </div>            
             @if ($tasks->count())
                 <div class="tasklist">
-                    {{-- display all even indexed tasks first --}}
-                    @for ($i = 0; $i < $tasks->count(); $i += 2)
-                        @if ($tasks->get($i) !== null)
-                            <livewire:tasks.task :task="$tasks->get($i)" wire:key="{{ $i }}">
-                        @endif
-                    @endfor
-                    {{-- display all odd indexed tasks first --}}
-                    @for ($i = 1; $i < $tasks->count(); $i += 2)
-                        @if ($tasks->get($i) !== null)
-                            <livewire:tasks.task :task="$tasks->get($i)" wire:key="{{ $i }}">
-                        @endif
-                    @endfor
+                    @foreach ($tasks as $task)
+                        <livewire:tasks.task :task="$task" wire:key="{{ $task->id }}" />
+                    @endforeach
                 </div>
             @else
                 <div class="w-full h-full flex justify-center items-center px-5">
@@ -112,6 +103,5 @@
                 </div>
             @endif
         </main>
-
     </div>
 </div>

@@ -4,7 +4,6 @@ namespace App\Livewire\Tasks;
 
 use Livewire\Component;
 use App\Models\Task;
-use Livewire\Attributes\On; 
 use Auth;
 
 class Tasks extends Component
@@ -12,14 +11,13 @@ class Tasks extends Component
     public $tasks;
     public $filter = 'all';
 
-    public function mount() {
-        $this->refreshData();
-    }
+    protected $listeners = [
+        'refresh-tasks' => 'handleFilter',
+    ];
 
-    #[On('refreshTasks')] 
-    public function refreshData() {
+    public function mount() {
         $user = Auth::user();
-        $this->tasks = $user->tasks()->latest()->get();     
+        $this->tasks = $user->tasks()->latest()->get();
     }
 
     public function handleFilter($filter = 'all') {

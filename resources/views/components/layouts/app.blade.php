@@ -14,6 +14,7 @@
     </head>
     <body class="min-h-dvh">
         {{ $slot }}
-
+        <livewire:components.delete-confirmation-modal >
+        <livewire:components.edit-task-modal >
     </body>
 </html>

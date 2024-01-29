@@ -6,10 +6,27 @@ use Livewire\Component;
 
 class Task extends Component
 {
-    public $task;
+    public $task, $isCompleted, $taskId, $showPopOver = false;
 
     public function mount($task) {
         $this->task = $task;
+        $this->isCompleted = $task->status === 'completed';
+        $this->showEditModal = false;
+    }
+
+    public function setStatus() {
+        $this->task->status = $this->isCompleted ? 'completed' : 'pending';
+        $this->task->save();
+    }
+
+    public function showDeleteConfirm() {
+        $this->showPopOver = false;
+        $this->dispatch('delete-task', [$this->task->id]);
+    }
+
+    public function showEditModal() {
+        $this->showPopOver = false;
+        $this->dispatch('edit-task', [$this->task->id]);
     }
 
     public function render()
