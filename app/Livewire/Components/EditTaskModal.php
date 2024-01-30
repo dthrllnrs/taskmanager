@@ -44,7 +44,7 @@ class EditTaskModal extends Component
         try {
             $this->task->update($validated);
             DB::commit();
-            $this->dispatch('refresh-tasks')->to(Tasks::class);
+            $this->dispatch('task-modified.'.$this->task->id, $this->task->id);
             $this->clearForm();
             $this->showModal = false;
         } catch (\Exception $e) {

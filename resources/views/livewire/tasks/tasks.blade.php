@@ -2,7 +2,10 @@
     <header>
         <nav>
             <div class="flex justify-between items-center">
-                <h1 class="text-2xl text-gray-dark">Task Manager</h1>
+                <div class="flex justify-start items center gap-5">
+                    <h1 class="text-2xl text-gray-dark">Task Manager</h1>
+                    <livewire:components.logout-modal >
+                </div>
                 <livewire:tasks.add-task >
             </div>
         </nav>
@@ -46,7 +49,7 @@
                 </div>
                 <div>
                     <img class="w-1/2 mb-7" src="{{ asset('svg/choice_pending.svg') }}" alt="" srcset="">
-                    <button class="transition-all hover:scale-110 text-gray-dark flex justify-start items-center mb-7">
+                    <button x-on:click="$wire.$dispatch('show-logout-modal')" class="transition-all hover:scale-110 text-gray-dark flex justify-start items-center mb-7">
                         <img class="w-10 text-gray-dark" src="{{ asset('svg/icons/exit.svg') }}" alt="" srcset="">
                         Logout    
                     </button>                    

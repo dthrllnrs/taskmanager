@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="mb-10">
-            <p class="text-gray-dark font-light">{{ $task->description }}</p>
+            <p class="text-gray-dark font-light break-words">{{ $task->description }}</p>
         </div>
         <div class="flex justify-between items-center">
             <span class="font-light text-gray-dark select-none">

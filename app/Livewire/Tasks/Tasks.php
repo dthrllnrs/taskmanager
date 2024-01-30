@@ -13,7 +13,8 @@ class Tasks extends Component
 
     protected $listeners = [
         'refresh-tasks' => 'handleFilter',
-        'task-modified' => 'taskModified',
+        'set-task-status' => 'setTaskStatus',
+        'delete-task-confirm' => 'deleteTask',
     ];
 
     public function mount() {
@@ -31,18 +32,28 @@ class Tasks extends Component
         } else {
             $tasks = $user->tasks();
         }
-        $this->tasks = $tasks->select('*')->latest()->get();
+        $this->tasks = $tasks->latest()->get();
     }
 
-    public function taskModified(Task $task) {
+    public function setTaskStatus(Task $task, $status) {
         $key = $this->tasks->search(function ($item) use ($task) {
             return $item->id == $task->id;
         });
 
         if ($key !== false) {
             $this->tasks[$key] = $task;
-        }
+        }        
+    }
 
+    public function deleteTask(Task $task) {
+        $key = $this->tasks->search(function ($item) use ($task) {
+            return $item->id == $task->id;
+        });
+        
+        if ($key !== false) {
+            $this->tasks->forget($key);
+            $task->delete();
+        }        
     }
 
     public function render()

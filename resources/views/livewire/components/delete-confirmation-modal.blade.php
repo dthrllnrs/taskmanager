@@ -1,4 +1,4 @@
-<div x-data="{showModal: @entangle('showModal')}" x-show="showModal" x-on:click.self="showModal = false"
+<div id="deleteConfirmationModal" x-data="{showModal: @entangle('showModal')}" x-show="showModal" x-on:click.self="showModal = false"
     class="fixed inset-0 bg-gray bg-opacity-50 flex items-center justify-center z-50 px-5">
     <!-- Modal content -->
     <div 

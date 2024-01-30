@@ -21,9 +21,17 @@ class DeleteConfirmationModal extends Component
     }
 
     public function handleConfirm() {
-        $this->task->delete();
-        $this->showModal = false;
-        $this->dispatch('refresh-tasks')->to(Tasks::class);
+        try {
+            $this->showModal = false;
+            $taskId = $this->task->id;
+            $this->task = null;
+            $this->dispatch('delete-task-confirm', $taskId);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+        // $this->task->delete();
+        // $this->showModal = false;
+        // $this->dispatch('refresh-tasks')->to(Tasks::class);
     }
 
     public function render()
