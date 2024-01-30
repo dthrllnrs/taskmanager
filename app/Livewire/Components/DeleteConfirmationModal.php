@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use Livewire\Component;
+use App\Livewire\Tasks\Tasks;
 use App\Models\Task;
 
 class DeleteConfirmationModal extends Component
@@ -22,7 +23,7 @@ class DeleteConfirmationModal extends Component
     public function handleConfirm() {
         $this->task->delete();
         $this->showModal = false;
-        $this->dispatch('refresh-tasks', 'all');
+        $this->dispatch('refresh-tasks')->to(Tasks::class);
     }
 
     public function render()

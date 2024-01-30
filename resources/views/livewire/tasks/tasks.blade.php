@@ -91,7 +91,7 @@
             @if ($tasks->count())
                 <div class="tasklist">
                     @foreach ($tasks as $task)
-                        <livewire:tasks.task :task="$task" wire:key="{{ $task->id }}" />
+                        <livewire:tasks.task :$task wire:key="{{ $task->id }}" />
                     @endforeach
                 </div>
             @else

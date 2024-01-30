@@ -4,6 +4,7 @@ namespace App\Livewire\Components;
 
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use App\Livewire\Tasks\Tasks;
 use App\Models\Task;
 use DB;
 
@@ -36,22 +37,22 @@ class EditTaskModal extends Component
 
     public function handleSubmit() {
        // validate form inputs
-       $validated = $this->validate();
+        $validated = $this->validate();
         
-       DB::beginTransaction();
-       $this->isLoading = true;
-       try {
+        DB::beginTransaction();
+        $this->isLoading = true;
+        try {
             $this->task->update($validated);
             DB::commit();
-            $this->dispatch('refresh-tasks', 'all');
+            $this->dispatch('refresh-tasks')->to(Tasks::class);
             $this->clearForm();
             $this->showModal = false;
-       } catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             $this->addError('data', $e->getMessage());
-       } finally {
+        } finally {
             $this->isLoading = false;
-       }
+        }
     }
 
     public function clearForm() {

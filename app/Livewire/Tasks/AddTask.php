@@ -4,6 +4,7 @@ namespace App\Livewire\Tasks;
 
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use App\Livewire\Tasks\Tasks;
 use Auth;
 use DB;
 
@@ -34,7 +35,7 @@ class AddTask extends Component
             $task = $user->tasks()->create($validated);
 
             DB::commit();
-            $this->dispatch('refresh-tasks', 'all');
+            $this->dispatch('refresh-tasks')->to(Tasks::class);
             $this->clearForm();
             $this->showModal = false;
         } catch (\Exception $e) {

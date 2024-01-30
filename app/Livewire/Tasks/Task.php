@@ -3,10 +3,13 @@
 namespace App\Livewire\Tasks;
 
 use Livewire\Component;
+use Livewire\Attributes\Reactive;
 
 class Task extends Component
 {
-    public $task, $isCompleted, $taskId, $showPopOver = false;
+    #[Reactive]
+    public $task;
+    public $isCompleted, $taskId, $showPopOver = false;
 
     public function mount($task) {
         $this->task = $task;

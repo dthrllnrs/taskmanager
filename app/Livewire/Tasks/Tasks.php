@@ -13,6 +13,7 @@ class Tasks extends Component
 
     protected $listeners = [
         'refresh-tasks' => 'handleFilter',
+        'task-modified' => 'taskModified',
     ];
 
     public function mount() {
@@ -24,13 +25,24 @@ class Tasks extends Component
         $user = Auth::user();
         $this->filter = $filter;
         if ($filter === 'pending' || $filter === 'completed') {
-            $tasks = $user->tasks()->select('*')->where('status', $filter);
+            $tasks = $user->tasks()->where('status', $filter);
         } else if ($filter === 'due_today') {
-            $tasks = $user->tasks()->select('*')->whereDate('due_date', date('Y-m-d'));
+            $tasks = $user->tasks()->whereDate('due_date', date('Y-m-d'));
         } else {
             $tasks = $user->tasks();
         }
-        $this->tasks = $tasks->latest()->get();
+        $this->tasks = $tasks->select('*')->latest()->get();
+    }
+
+    public function taskModified(Task $task) {
+        $key = $this->tasks->search(function ($item) use ($task) {
+            return $item->id == $task->id;
+        });
+
+        if ($key !== false) {
+            $this->tasks[$key] = $task;
+        }
+
     }
 
     public function render()
